@@ -1,0 +1,9 @@
+<img src="../assets/icons/logo_1.png" />
+
+<div></div>
+
+<input #email placeholder="email" type="email" />
+<input #password placeholder="password" type="password" />
+<button (click)="login({ email: email.value, password: password.value })">
+  Login
+</button>

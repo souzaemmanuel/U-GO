@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@u-go/auth": ["libs/auth/src/index.ts"],
+      "@u-go/models": ["libs/models/src/index.ts"],
+      "@u-go/services": ["libs/services/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

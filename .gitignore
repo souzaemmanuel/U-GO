@@ -43,3 +43,4 @@ Thumbs.db
 
 # Secrets
 /apps/backend/secrets.ts
+/apps/backend/.env

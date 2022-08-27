@@ -1,20 +1,23 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/services/src",
+  "sourceRoot": "libs/shared/models/src",
   "prefix": "u-go",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/services"],
+      "outputs": ["coverage/libs/shared/models"],
       "options": {
-        "jestConfig": "libs/services/jest.config.ts",
+        "jestConfig": "libs/shared/models/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/services/**/*.ts", "libs/services/**/*.html"]
+        "lintFilePatterns": [
+          "libs/shared/models/**/*.ts",
+          "libs/shared/models/**/*.html"
+        ]
       }
     }
   },

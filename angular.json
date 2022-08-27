@@ -2,11 +2,11 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "auth": "libs/auth",
+    "auth": "libs/components/auth",
     "backend": "apps/backend",
     "frontend": "apps/frontend",
     "frontend-e2e": "apps/frontend-e2e",
-    "models": "libs/models",
-    "services": "libs/services"
+    "models": "libs/shared/models",
+    "services": "libs/shared/services"
   }
 }

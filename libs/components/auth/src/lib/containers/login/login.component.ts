@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Authenticate } from '@u-go/models';
+import { AuthUser } from '@u-go/models';
 import { AuthService } from '@u-go/services';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login(authenticate: Authenticate): void {
-    this.authService.login(authenticate).subscribe();
+  login(AuthUser: AuthUser): void {
+    this.authService.login(AuthUser).subscribe();
   }
 }

@@ -1,20 +1,23 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/models/src",
+  "sourceRoot": "libs/components/auth/src",
   "prefix": "u-go",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/models"],
+      "outputs": ["coverage/libs/components/auth"],
       "options": {
-        "jestConfig": "libs/models/jest.config.ts",
+        "jestConfig": "libs/components/auth/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/models/**/*.ts", "libs/models/**/*.html"]
+        "lintFilePatterns": [
+          "lcomponents/ibs/auth/**/*.ts",
+          "libs/components/auth/**/*.html"
+        ]
       }
     }
   },

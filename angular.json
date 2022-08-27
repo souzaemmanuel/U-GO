@@ -5,7 +5,6 @@
     "auth": "libs/components/auth",
     "backend": "apps/backend",
     "frontend": "apps/frontend",
-    "frontend-e2e": "apps/frontend-e2e",
     "models": "libs/shared/models",
     "services": "libs/shared/services"
   }

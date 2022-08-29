@@ -4,8 +4,9 @@ import {
   HttpRequest,
   HttpHandler,
   HttpErrorResponse,
+  HttpEvent,
 } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '@u-go/services';
 

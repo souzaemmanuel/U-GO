@@ -7,6 +7,7 @@
     "frontend": "apps/frontend",
     "guards": "libs/shared/guards",
     "interceptors": "libs/shared/interceptors",
+    "loading": "libs/components/loading",
     "models": "libs/shared/models",
     "services": "libs/shared/services"
   }

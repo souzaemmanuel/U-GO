@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AuthUser } from '@u-go/models';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -10,15 +9,17 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginFormComponent {
   @Output() submitForm = new EventEmitter<any>();
 
-  loginForm = new FormGroup({
+  loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
   login() {
-    this.submitForm.emit({
-      username: this.loginForm.value.username,
-      password: this.loginForm.value.password,
-    });
+    if (this.loginForm.valid) {
+      this.submitForm.emit({
+        username: this.loginForm.value.username,
+        password: this.loginForm.value.password,
+      });
+    }
   }
 }

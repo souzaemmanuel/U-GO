@@ -1,0 +1,49 @@
+@import './colors.scss';
+
+%button {
+  min-width: 160px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+@mixin button($color, $background-color, $font-weight: false, $border: false) {
+  @extend %button;
+
+  color: $color;
+  background-color: $background-color;
+
+  @if ($font-weight) {
+    font-weight: $font-weight;
+  }
+
+  @if ($border) {
+    border: 2px solid $border;
+  } @else {
+    border: none;
+  }
+}
+
+.button-blue {
+  text-transform: uppercase;
+  @include button($white, $blue, bold);
+}
+
+.button-light-blue {
+  text-transform: capitalize;
+
+  @include button($white, $light-blue, 600);
+}
+
+.button-blue-outline {
+  @include button($blue, $white, 600, $light-blue);
+}
+
+.button-light-blue-outline {
+  font-weight: 600;
+
+  @include button($light-blue, $white, bold, $light-blue);
+}

@@ -15,11 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@u-go/auth": ["libs/components/auth/src/index.ts"],
-      "@u-go/models": ["libs/shared/models/src/index.ts"],
-      "@u-go/services": ["libs/shared/services/src/index.ts"],
+      "@env/backend": ["environments/backend/environment.ts"],
       "@env/frontend": ["environments/frontend/environment.ts"],
-      "@env/backend": ["environments/backend/environment.ts"]
+      "@u-go/auth": ["libs/components/auth/src/index.ts"],
+      "@u-go/guards": ["libs/guards/src/index.ts"],
+      "@u-go/interceptors": ["libs/shared/interceptors/src/index.ts"],
+      "@u-go/models": ["libs/shared/models/src/index.ts"],
+      "@u-go/services": ["libs/shared/services/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

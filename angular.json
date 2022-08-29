@@ -5,6 +5,8 @@
     "auth": "libs/components/auth",
     "backend": "apps/backend",
     "frontend": "apps/frontend",
+    "guards": "libs/shared/guards",
+    "interceptors": "libs/shared/interceptors",
     "models": "libs/shared/models",
     "services": "libs/shared/services"
   }

@@ -4,6 +4,7 @@
   "projects": {
     "auth": "libs/components/auth",
     "backend": "apps/backend",
+    "customer-portal": "libs/components/customer-portal",
     "frontend": "apps/frontend",
     "guards": "libs/shared/guards",
     "interceptors": "libs/shared/interceptors",

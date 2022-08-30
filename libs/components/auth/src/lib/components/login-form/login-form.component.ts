@@ -10,14 +10,14 @@ export class LoginFormComponent {
   @Output() submitForm = new EventEmitter<any>();
 
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
   login() {
     if (this.loginForm.valid) {
       this.submitForm.emit({
-        username: this.loginForm.value.username,
+        email: this.loginForm.value.email,
         password: this.loginForm.value.password,
       });
     }

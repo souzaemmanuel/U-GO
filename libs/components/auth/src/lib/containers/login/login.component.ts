@@ -1,6 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthUser } from '@u-go/models';
 import { AuthService } from '@u-go/services';
+import { pipe, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'u-go-login',
@@ -8,12 +15,23 @@ import { AuthService } from '@u-go/services';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+export class LoginComponent implements OnDestroy {
+  onDestroy$ = new Subject<boolean>();
 
-  ngOnInit() {}
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
+  }
 
   login(AuthUser: AuthUser): void {
-    this.authService.login(AuthUser).subscribe();
+    this.authService
+      .login(AuthUser)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res) => {
+        this.router.navigate(['']);
+        console.log('res: ', res);
+      });
   }
 }

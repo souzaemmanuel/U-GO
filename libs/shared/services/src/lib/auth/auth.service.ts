@@ -28,6 +28,13 @@ export class AuthService {
       );
   }
 
+  createAccount(AuthUser: AuthUser): Observable<UserToken> {
+    return this.httpClient.post<UserToken>(
+      environment.baseUrl + 'users',
+      AuthUser
+    );
+  }
+
   private saveToken(token: string): void {
     window.localStorage.setItem(AUTH_TOKEN_KEY, token);
   }

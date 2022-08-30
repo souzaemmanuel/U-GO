@@ -40,6 +40,6 @@ export class AuthService {
       }
     }
 
-    throw new UnauthorizedError('Email or password is invalid.');
+    throw new UnauthorizedError();
   }
 }

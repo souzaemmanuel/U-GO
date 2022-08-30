@@ -1,13 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnDestroy,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthUser } from '@u-go/models';
 import { AuthService } from '@u-go/services';
-import { pipe, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'u-go-login',
@@ -29,9 +24,8 @@ export class LoginComponent implements OnDestroy {
     this.authService
       .login(AuthUser)
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe((res) => {
-        this.router.navigate(['']);
-        console.log('res: ', res);
+      .subscribe(() => {
+        this.router.navigate(['customer/home']);
       });
   }
 }

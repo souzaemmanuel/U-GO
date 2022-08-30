@@ -6,3 +6,7 @@ export interface AuthUser {
 export interface UserToken {
   accessToken: string;
 }
+
+export interface CreateAccount extends AuthUser {
+  name: string;
+}

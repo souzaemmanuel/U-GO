@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'customer-portal',
+  displayName: 'customer-area',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/components/customer-portal',
+  coverageDirectory: '../../../coverage/libs/components/customer-area',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

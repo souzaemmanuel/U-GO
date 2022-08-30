@@ -47,3 +47,7 @@
 
   @include button($light-blue, $white, bold, $light-blue);
 }
+
+.button-logout {
+  @include button($blue, $white, 600);
+}

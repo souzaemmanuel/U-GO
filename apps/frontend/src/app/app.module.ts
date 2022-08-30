@@ -12,7 +12,7 @@ import {
   RequestInterceptor,
   ErrorInterceptor,
 } from '@u-go/interceptors';
-import { CustomerPortalModule, customerRoutes } from '@u-go/customer-portal';
+import { CustomerPortalModule, customerRoutes } from '@u-go/customer-area';
 
 const routes = [
   { path: 'auth', children: authRoutes },

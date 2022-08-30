@@ -18,7 +18,7 @@
       "@env/backend": ["environments/backend/environment.ts"],
       "@env/frontend": ["environments/frontend/environment.ts"],
       "@u-go/auth": ["libs/components/auth/src/index.ts"],
-      "@u-go/customer-portal": ["libs/components/customer-portal/src/index.ts"],
+      "@u-go/customer-area": ["libs/components/customer-area/src/index.ts"],
       "@u-go/guards": ["libs/shared/guards/src/index.ts"],
       "@u-go/interceptors": ["libs/shared/interceptors/src/index.ts"],
       "@u-go/loading": ["libs/components/loading/src/index.ts"],

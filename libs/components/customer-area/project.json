@@ -1,13 +1,13 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/components/customer-portal/src",
+  "sourceRoot": "libs/components/customer-area/src",
   "prefix": "u-go",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/components/customer-portal"],
+      "outputs": ["coverage/libs/components/customer-area"],
       "options": {
-        "jestConfig": "libs/components/customer-portal/jest.config.ts",
+        "jestConfig": "libs/components/customer-area/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,8 +15,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/components/customer-portal/**/*.ts",
-          "libs/components/customer-portal/**/*.html"
+          "libs/components/customer-area/**/*.ts",
+          "libs/components/customer-area/**/*.html"
         ]
       }
     }

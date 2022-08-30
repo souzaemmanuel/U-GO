@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SearchFlightsFilter } from '@u-go/models';
 
 @Component({
   selector: 'u-go-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  constructor() {}
+export class HomeComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  searchFlights(filter: SearchFlightsFilter): void {
+    this.router.navigate([
+      `customer/flights-list/${filter.from}/${filter.to}/${filter.budget}`,
+    ]);
+  }
 }

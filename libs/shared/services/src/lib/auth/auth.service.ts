@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '@env/frontend';
 import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 const AUTH_TOKEN_KEY = 'token';
 @Injectable({
@@ -12,7 +13,7 @@ const AUTH_TOKEN_KEY = 'token';
 export class AuthService {
   private userSubject$ = new BehaviorSubject<any>(null);
   user$ = this.userSubject$.asObservable();
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(AuthUser: AuthUser): Observable<UserToken> {
     return this.httpClient
@@ -68,7 +69,7 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  isUserLoggedIn() {
+  isUserLoggedIn(): boolean {
     const token = this.getAuthToken();
 
     if (!token || this.isTokenExpired(token)) {
@@ -76,5 +77,10 @@ export class AuthService {
     }
 
     return true;
+  }
+
+  logout(): void {
+    window.localStorage.removeItem(AUTH_TOKEN_KEY);
+    this.router.navigate(['auth/login']);
   }
 }

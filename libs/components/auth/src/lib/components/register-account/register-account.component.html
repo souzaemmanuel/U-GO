@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="logo-section">
+    <img src="../assets/icons/logo_2.png" />
+  </div>
+  <form class="form-section" [formGroup]="accountForm">
+    <div class="form-group">
+      <input placeholder="Your name" type="text" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <input placeholder="Email" type="email" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <input
+        placeholder="Password"
+        type="password"
+        formControlName="password"
+      />
+    </div>
+    <div class="form-group">
+      <button class="button-light-blue" (click)="createAccount()">Login</button>
+    </div>
+  </form>
+</div>

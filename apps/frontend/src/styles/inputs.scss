@@ -1,0 +1,16 @@
+@import './colors.scss';
+
+input {
+  min-width: 160px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
+  padding: 0px 20px 0px 20px;
+  border: 2px solid $light-blue;
+  text-align: center;
+}
+
+input::placeholder {
+  color: $blue;
+  font-weight: 500;
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,10 +11,18 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async create(createUserDto: CreateUserDto) {
+    if (await this.findByEmail(createUserDto.email)) {
+      throw new HttpException(
+        'User already existis',
+        HttpStatus.UNPROCESSABLE_ENTITY
+      );
+    }
+
     const user = new this.userModel({
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, 10),
     });
+
     return user.save();
   }
 

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/interceptors/src",
+  "prefix": "u-go",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/interceptors"],
+      "options": {
+        "jestConfig": "libs/interceptors/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/interceptors/**/*.ts",
+          "libs/interceptors/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

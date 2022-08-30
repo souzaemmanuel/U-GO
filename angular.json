@@ -2,8 +2,14 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "auth": "libs/components/auth",
     "backend": "apps/backend",
+    "customer-portal": "libs/components/customer-portal",
     "frontend": "apps/frontend",
-    "frontend-e2e": "apps/frontend-e2e"
+    "guards": "libs/shared/guards",
+    "interceptors": "libs/shared/interceptors",
+    "loading": "libs/components/loading",
+    "models": "libs/shared/models",
+    "services": "libs/shared/services"
   }
 }

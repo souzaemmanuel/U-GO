@@ -15,7 +15,7 @@ import {
 import { CustomerPortalModule, customerRoutes } from '@u-go/customer-area';
 
 const routes = [
-  { path: 'auth', children: authRoutes },
+  { path: 'auth', children: authRoutes, canActivate: [AuthGuard] },
   { path: 'customer', children: customerRoutes, canActivate: [AuthGuard] },
   {
     path: '**',

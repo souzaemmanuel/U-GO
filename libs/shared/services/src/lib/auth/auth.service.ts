@@ -11,29 +11,30 @@ const AUTH_TOKEN_KEY = 'token';
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject$ = new BehaviorSubject<any>(null);
+  private userSubject$ = new BehaviorSubject<UserToken>({} as UserToken);
   user$ = this.userSubject$.asObservable();
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  login(AuthUser: AuthUser): Observable<UserToken> {
+  login(user: AuthUser): Observable<UserToken> {
     return this.httpClient
-      .post<UserToken>(environment.baseUrl + 'login', AuthUser)
+      .post<UserToken>(environment.baseUrl + 'login', user)
       .pipe(
         tap((response: UserToken) => {
           this.saveToken(response.accessToken);
 
           this.userSubject$.next({
-            token: response.accessToken,
+            name: response.name,
+            email: response.email,
+            accessToken: response.accessToken,
           });
+
+          alert(`Welcome !`);
         })
       );
   }
 
-  createAccount(AuthUser: AuthUser): Observable<UserToken> {
-    return this.httpClient.post<UserToken>(
-      environment.baseUrl + 'users',
-      AuthUser
-    );
+  createAccount(user: AuthUser): Observable<UserToken> {
+    return this.httpClient.post<UserToken>(environment.baseUrl + 'users', user);
   }
 
   private saveToken(token: string): void {

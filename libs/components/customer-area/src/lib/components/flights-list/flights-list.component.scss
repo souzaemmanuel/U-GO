@@ -1,0 +1,38 @@
+table.flightsTable {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table.flightsTable td,
+table.flightsTable th {
+  border: 1px solid #e4e1e1;
+  padding: 9px 5px;
+}
+
+table.flightsTable tbody td:last-child {
+  width: 200px;
+}
+
+table.flightsTable tbody td:not(:first-child) {
+  color: #838383;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+table.flightsTable tbody td:first-child {
+  color: #00e7f0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+table.flightsTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+
+.actions button {
+  width: 60px;
+}

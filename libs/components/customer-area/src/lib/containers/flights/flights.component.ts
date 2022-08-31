@@ -1,14 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '@u-go/services';
-import { flight, SearchFlightsFilter } from '@u-go/models';
+import { Flight, SearchFlightsFilter } from '@u-go/models';
+import { Subject, takeUntil } from 'rxjs';
+
 @Component({
   selector: 'u-go-flights',
   templateUrl: './flights.component.html',
   styleUrls: ['./flights.component.scss'],
 })
-export class FlightsComponent implements OnInit {
-  flights: flight[] = [];
+export class FlightsComponent implements OnInit, OnDestroy {
+  readonly emptyListMessage: string =
+    'No flights were found! Please do a new search using different filters!';
+
+  readonly errorMessage: string =
+    'Some error occurs, please try again in some minutes!';
+
+  flights: Flight[] = [];
   filter: SearchFlightsFilter = {
     from: '',
     to: '',
@@ -16,7 +24,7 @@ export class FlightsComponent implements OnInit {
   };
   showEmptyState = false;
   showErrorState = false;
-
+  onDestroy$ = new Subject<boolean>();
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
@@ -42,12 +50,30 @@ export class FlightsComponent implements OnInit {
   getFlights(): void {
     this.flightService
       .getFlightsAvailable(this.filter)
-      .subscribe((flights: flight[]) => {
-        this.flights = flights;
-      });
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(
+        (flights: Flight[]) => {
+          this.flights = flights;
+          this.showErrorState = false;
+          if (this.flights.length > 0) {
+            this.showEmptyState = false;
+          } else {
+            this.showEmptyState = true;
+          }
+        },
+        () => {
+          this.showErrorState = true;
+          this.showEmptyState = false;
+        }
+      );
   }
 
   goToCustomerHome(): void {
     this.router.navigate(['customer/home']);
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 }

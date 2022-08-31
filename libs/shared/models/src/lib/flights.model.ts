@@ -4,7 +4,7 @@ export interface SearchFlightsFilter {
   budget: string;
 }
 
-export interface flight {
+export interface Flight {
   airlineName: string;
   id: number;
   arrivalAirportCode: string;

@@ -16,6 +16,20 @@
       </button>
     </div>
   </div>
-  <div class="flight-results"></div>
-  <u-go-flights-list [flights]="flights"></u-go-flights-list>
+  <div class="flight-results" [ngSwitch]="true">
+    <u-go-flights-list
+      [flights]="flights"
+      *ngSwitchCase="flights.length > 0 && !showErrorState && !showErrorState"
+    ></u-go-flights-list>
+
+    <u-go-alert
+      *ngSwitchCase="showEmptyState"
+      [alertMessage]="emptyListMessage"
+    ></u-go-alert>
+
+    <u-go-alert
+      *ngSwitchCase="showErrorState"
+      [alertMessage]="errorMessage"
+    ></u-go-alert>
+  </div>
 </div>

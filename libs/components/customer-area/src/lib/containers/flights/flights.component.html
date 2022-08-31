@@ -3,13 +3,19 @@
     <div class="icon-text">
       <img src="../assets/icons/logo_1.png" />
 
-      <span> Your flights from LAX to CANCUN under $150</span>
+      <span>
+        Your flights from {{ filter.from }} to {{ filter.to }} under ${{
+          filter.budget
+        }}</span
+      >
     </div>
 
     <div class="action">
-      <button class="button-light-blue-outline">New Search</button>
+      <button class="button-light-blue-outline" (click)="goToCustomerHome()">
+        New Search
+      </button>
     </div>
   </div>
   <div class="flight-results"></div>
-  <u-go-flights-list></u-go-flights-list>
+  <u-go-flights-list [flights]="flights"></u-go-flights-list>
 </div>

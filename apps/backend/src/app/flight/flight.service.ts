@@ -17,15 +17,15 @@ export class FlightService {
   }
 
   search(filter: FlightFilter) {
-    const obj = this.flightModel.find({
-      arrivalAirportCode: filter.arrivalAirportCode,
-      departureAirportCode: filter.departureAirportCode,
-      cost: { $lt: filter.cost },
+    let where = {
+      arrivalAirportCode: filter.from,
+      departureAirportCode: filter.to,
+      cost: { $lt: filter.budget },
       departureDate: {
         $gt: new Date(),
       },
-    });
-    return obj;
+    };
+    return this.flightModel.find(where);
   }
 
   findAll() {

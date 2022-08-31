@@ -11,4 +11,5 @@ export interface flight {
   departureAirportCode: string;
   cost: number;
   departureDate: Date;
+  duration: string;
 }

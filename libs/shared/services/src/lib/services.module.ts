@@ -6,10 +6,11 @@ import { SnackbarService } from './snackbar/snackbar.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FlightService } from './flight/flight.service';
 
 @NgModule({
   imports: [CommonModule, MatSnackBarModule, MatButtonModule, MatIconModule],
   exports: [MatSnackBarModule, MatButtonModule, MatIconModule],
-  providers: [AuthService, LoadingService, SnackbarService],
+  providers: [AuthService, LoadingService, SnackbarService, FlightService],
 })
 export class ServicesModule {}

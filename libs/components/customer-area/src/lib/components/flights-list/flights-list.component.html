@@ -11,12 +11,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>$ 190</td>
-        <td>cell2_1cell2_1</td>
-        <td>cell3_1</td>
-        <td>cell4_1</td>
-        <td>cell4_1</td>
+      <tr *ngFor="let flight of flights">
+        <td>
+          {{ flight.arrivalAirportCode }} - {{ flight.departureAirportCode }}
+        </td>
+        <td>${{ flight.cost }}</td>
+        <td>{{ flight.airlineName }}</td>
+        <td>{{ flight.departureDate | date }}</td>
+        <td>{{ flight.duration }}</td>
         <td>
           <div class="actions">
             <button class="button-blue">Book now!</button>

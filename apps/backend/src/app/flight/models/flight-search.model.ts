@@ -1,5 +1,5 @@
 export interface FlightFilter {
-  arrivalAirportCode: string;
-  departureAirportCode: string;
-  cost: number;
+  from: string;
+  to: string;
+  budget: number;
 }

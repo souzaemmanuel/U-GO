@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FlightsListComponent } from './components/flights-list/flights-list.component';
 import { FlightsComponent } from './containers/flights/flights.component';
+import { ServicesModule } from '@u-go/services';
 
 export const customerRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const customerRoutes: Route[] = [
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
+    ServicesModule,
   ],
   declarations: [
     HomeComponent,

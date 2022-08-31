@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Flight } from '@u-go/models';
 
 @Component({
   selector: 'u-go-flights-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flights-list.component.scss'],
 })
 export class FlightsListComponent implements OnInit {
+  @Input() flights: Flight[] = [];
+
   constructor() {}
 
   ngOnInit(): void {}

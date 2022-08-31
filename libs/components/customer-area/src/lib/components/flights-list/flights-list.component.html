@@ -1,1 +1,30 @@
-<p>flights-list works!</p>
+<div class="container">
+  <table class="flightsTable">
+    <thead>
+      <tr>
+        <th>From/To</th>
+        <th>Cost ($)</th>
+        <th>Operated By</th>
+        <th>Date/Time</th>
+        <th>Travel Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of flights">
+        <td>
+          {{ flight.arrivalAirportCode }} - {{ flight.departureAirportCode }}
+        </td>
+        <td>${{ flight.cost }}</td>
+        <td>{{ flight.airlineName }}</td>
+        <td>{{ flight.departureDate | date }}</td>
+        <td>{{ flight.duration }}</td>
+        <td>
+          <div class="actions">
+            <button class="button-blue">Book now!</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

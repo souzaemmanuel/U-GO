@@ -5,8 +5,9 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { CONN_STRING } from '../../secrets';
+import { FlightModule } from './flight/flight.module';
 @Module({
-  imports: [UsersModule, MongooseModule.forRoot(CONN_STRING), AuthModule],
+  imports: [UsersModule, MongooseModule.forRoot(CONN_STRING), AuthModule, FlightModule],
   controllers: [],
   providers: [
     {

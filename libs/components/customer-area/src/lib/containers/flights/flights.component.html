@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="toolbar-section">
+    <div class="icon-text">
+      <img src="../assets/icons/logo_1.png" />
+
+      <span>
+        Your flights from {{ filter.from }} to {{ filter.to }} under ${{
+          filter.budget
+        }}</span
+      >
+    </div>
+
+    <div class="action">
+      <button class="button-light-blue-outline" (click)="goToCustomerHome()">
+        New Search
+      </button>
+    </div>
+  </div>
+  <div class="flight-results" [ngSwitch]="true">
+    <u-go-flights-list
+      [flights]="flights"
+      *ngSwitchCase="flights.length > 0 && !showErrorState && !showErrorState"
+    ></u-go-flights-list>
+
+    <u-go-alert
+      *ngSwitchCase="showEmptyState"
+      [alertMessage]="emptyListMessage"
+    ></u-go-alert>
+
+    <u-go-alert
+      *ngSwitchCase="showErrorState"
+      [alertMessage]="errorMessage"
+    ></u-go-alert>
+  </div>
+</div>

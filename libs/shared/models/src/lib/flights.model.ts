@@ -4,11 +4,12 @@ export interface SearchFlightsFilter {
   budget: string;
 }
 
-export interface flight {
-  dep_iata: string;
-  arr_iata: string;
-  cost: string;
-  date: string;
-  time: string;
-  airline_name: string;
+export interface Flight {
+  airlineName: string;
+  id: number;
+  arrivalAirportCode: string;
+  departureAirportCode: string;
+  cost: number;
+  departureDate: Date;
+  duration: string;
 }

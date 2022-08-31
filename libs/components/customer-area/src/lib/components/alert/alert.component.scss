@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  span {
+    background-color: #009af3;
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 10px;
+
+    text-align: center;
+    margin: 50px;
+    padding: 50px;
+    border: 2px solid;
+  }
+}

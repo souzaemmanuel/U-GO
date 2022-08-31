@@ -1,0 +1,36 @@
+.container {
+  height: 100%;
+  .flight-results {
+    height: 80%;
+  }
+}
+
+.toolbar-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+  span {
+    color: #009af3;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+
+  img {
+    height: 50px;
+  }
+
+  button {
+    width: 190px;
+  }
+
+  .icon-text {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+}

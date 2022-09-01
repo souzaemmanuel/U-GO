@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { Airlines } from '../models/airlines.enum';
 import { Airports } from '../models/airports.enum';
-import { TravelDuration } from '../models/travel-duration.model';
 
 export type FlightDocument = Flight & Document;
 
@@ -29,8 +28,8 @@ export class Flight {
   @Prop({ type: Boolean })
   isAvailable: boolean;
 
-  @Prop({ type: Object })
-  duration: TravelDuration;
+  @Prop({ required: true, type: String })
+  duration: string;
 }
 
 export const FlightSchema = SchemaFactory.createForClass(Flight);

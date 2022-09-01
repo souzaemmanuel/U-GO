@@ -6,10 +6,14 @@ export interface SearchFlightsFilter {
 
 export interface Flight {
   airlineName: string;
-  id: number;
+  _id: string;
   arrivalAirportCode: string;
   departureAirportCode: string;
   cost: number;
   departureDate: Date;
   duration: string;
+}
+
+export interface BookedFlight extends Flight {
+  clientName: string;
 }

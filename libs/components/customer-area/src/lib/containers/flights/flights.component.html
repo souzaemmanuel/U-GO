@@ -19,6 +19,7 @@
   <div class="flight-results" [ngSwitch]="true">
     <u-go-flights-list
       [flights]="flights"
+      (bookFlight)="book($event)"
       *ngSwitchCase="flights.length > 0 && !showErrorState && !showErrorState"
     ></u-go-flights-list>
 
@@ -33,3 +34,9 @@
     ></u-go-alert>
   </div>
 </div>
+
+<u-go-booking-modal
+  [show]="showBookingModal"
+  (currentState)="closeModal($event)"
+  [bookedFlight]="bookedFlight"
+></u-go-booking-modal>

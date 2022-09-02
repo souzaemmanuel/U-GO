@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Flight } from '@u-go/models';
 
 @Component({
@@ -6,10 +6,13 @@ import { Flight } from '@u-go/models';
   templateUrl: './flights-list.component.html',
   styleUrls: ['./flights-list.component.scss'],
 })
-export class FlightsListComponent implements OnInit {
+export class FlightsListComponent {
   @Input() flights: Flight[] = [];
+  @Output() bookFlight: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  book(id: string) {
+    this.bookFlight.emit(id);
+  }
 }

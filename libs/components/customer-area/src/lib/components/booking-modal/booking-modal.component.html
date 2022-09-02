@@ -1,0 +1,68 @@
+<ng-container *ngIf="show">
+  <div class="modal">
+    <div class="container">
+      <div class="title">
+        <img src="../assets/icons/logo_1.png" />
+        <h2>You area booked!</h2>
+      </div>
+
+      <div class="info">
+        <div class="row">
+          <span class="bold">Name:</span>
+          <span>
+            {{ bookedFlight?.clientName ? bookedFlight?.clientName : '-' }}
+          </span>
+        </div>
+        <div class="row">
+          <span class="bold">From: </span>
+          <span>
+            {{
+              bookedFlight?.arrivalAirportCode
+                ? bookedFlight?.arrivalAirportCode
+                : '-'
+            }}
+
+            <span class="bold">To: </span>
+            {{
+              bookedFlight?.departureAirportCode
+                ? bookedFlight?.departureAirportCode
+                : '-'
+            }}
+          </span>
+        </div>
+        <div class="row">
+          <span class="bold">Date:</span>
+          <span>
+            {{
+              bookedFlight?.departureDate
+                ? (bookedFlight?.departureDate | date)
+                : '-'
+            }}
+          </span>
+        </div>
+        <div class="row">
+          <span class="bold">Time:</span>
+          <span>
+            {{ bookedFlight?.duration ? bookedFlight?.duration : '-' }}
+          </span>
+        </div>
+        <div class="row">
+          <span class="bold">Flight Number:</span>
+          <span> {{ bookedFlight?._id ? bookedFlight?._id : '-' }} </span>
+        </div>
+        <div class="row">
+          <span class="bold">Cost:</span>
+          <span>
+            {{ bookedFlight?.cost ? (bookedFlight?.cost | currency) : '-' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="action">
+        <button class="button-blue" (click)="toggle()">Done !</button>
+      </div>
+    </div>
+  </div>
+
+  <div (click)="toggle()" class="overlay"></div>
+</ng-container>

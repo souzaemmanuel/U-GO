@@ -15,13 +15,15 @@
         <td>
           {{ flight.arrivalAirportCode }} - {{ flight.departureAirportCode }}
         </td>
-        <td>${{ flight.cost }}</td>
+        <td>{{ flight.cost | currency }}</td>
         <td>{{ flight.airlineName }}</td>
         <td>{{ flight.departureDate | date }}</td>
         <td>{{ flight.duration }}</td>
         <td>
           <div class="actions">
-            <button class="button-blue">Book now!</button>
+            <button class="button-blue" (click)="book(flight._id)">
+              Book now!
+            </button>
           </div>
         </td>
       </tr>

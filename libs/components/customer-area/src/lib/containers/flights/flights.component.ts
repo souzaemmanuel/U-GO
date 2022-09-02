@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '@u-go/services';
-import { Flight, SearchFlightsFilter } from '@u-go/models';
+import { BookedFlight, Flight, SearchFlightsFilter } from '@u-go/models';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -16,15 +16,24 @@ export class FlightsComponent implements OnInit, OnDestroy {
   readonly errorMessage: string =
     'Some error occurs, please try again in some minutes!';
 
-  flights: Flight[] = [];
   filter: SearchFlightsFilter = {
     from: '',
     to: '',
     budget: '',
   };
+
+  flights: Flight[] = [];
+
+  bookedFlight: BookedFlight | undefined;
+
+  showBookingModal = false;
+
   showEmptyState = false;
+
   showErrorState = false;
+
   onDestroy$ = new Subject<boolean>();
+
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
@@ -68,8 +77,27 @@ export class FlightsComponent implements OnInit, OnDestroy {
       );
   }
 
+  bookFlight(flightId: string): void {
+    this.flightService
+      .bookFlight(flightId)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((bookedFlight: BookedFlight) => {
+        this.showBookingModal = true;
+        this.bookedFlight = bookedFlight;
+      });
+  }
+
   goToCustomerHome(): void {
     this.router.navigate(['customer/home']);
+  }
+
+  book(id: string) {
+    this.bookFlight(id);
+  }
+
+  closeModal(showBookingModal: boolean): void {
+    this.showBookingModal = showBookingModal;
+    this.getFlights();
   }
 
   ngOnDestroy(): void {

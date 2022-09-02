@@ -12,7 +12,13 @@ import {
 import { FlightService } from './flight.service';
 import { CreateFlightDto } from './dto/create-flight.dto';
 import { UpdateFlightDto } from './dto/update-flight.dto';
-import { FlightFilter } from './models/flight-search.model';
+import {
+  BookedFlight,
+  BookFlight,
+  FlightFilter,
+} from './models/flight-search.model';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { User } from '../users/entities/user.entity';
 
 @Controller('flight')
 export class FlightController {
@@ -27,6 +33,15 @@ export class FlightController {
   @Post('search')
   search(@Body() flightFilter: FlightFilter) {
     return this.flightService.search(flightFilter);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('book')
+  book(
+    @Body() flight: BookFlight,
+    @CurrentUser() user: User
+  ): Promise<BookedFlight> {
+    return this.flightService.book(flight.flightId, user);
   }
 
   @Get()

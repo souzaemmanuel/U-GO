@@ -21,7 +21,7 @@ export class FlightService {
   bookFlight(flightId: string): Observable<BookedFlight> {
     return this.httpClient.post<BookedFlight>(
       environment.baseUrl + 'flight/book',
-      flightId
+      { flightId }
     );
   }
 }

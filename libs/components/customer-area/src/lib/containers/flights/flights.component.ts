@@ -95,9 +95,9 @@ export class FlightsComponent implements OnInit, OnDestroy {
     this.bookFlight(id);
   }
 
-  setCurrentModalState(showBookingModal: boolean): void {
+  closeModal(showBookingModal: boolean): void {
     this.showBookingModal = showBookingModal;
-    //do again the search or goback
+    this.getFlights();
   }
 
   ngOnDestroy(): void {

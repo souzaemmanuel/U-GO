@@ -26,7 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.message instanceof Array) {
           alert(error.message[0]);
           //TODO: Make this snackbar work
-          this.snackbarService.open(error.message[0]);
+          // this.snackbarService.open(error.message[0]);
         } else {
           alert(error.message);
         }

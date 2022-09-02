@@ -1,15 +1,17 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsNumber, IsString } from 'class-validator';
+import { Airlines } from '../models/airlines.enum';
+import { Airports } from '../models/airports.enum';
 
 export class CreateFlightDto {
   @IsString()
-  airlineName: string;
+  airlineName: Airlines;
 
   @IsString()
-  arrivalAirportCode: string;
+  arrivalAirportCode: Airports;
 
   @IsString()
-  departureAirportCode: string;
+  departureAirportCode: Airports;
 
   @IsNumber()
   cost: number;
@@ -17,12 +19,20 @@ export class CreateFlightDto {
   @IsDate()
   @Type(() => Date)
   departureDate: Date;
+
+  @IsBoolean()
+  isAvailable: boolean;
+
+  @IsString()
+  duration: string;
 }
 
-const teste: CreateFlightDto = {
-  airlineName: 'GOL',
-  arrivalAirportCode: 'CWB',
-  departureAirportCode: 'LAX',
+const example: CreateFlightDto = {
+  airlineName: Airlines.GOL,
+  arrivalAirportCode: Airports.AUS,
+  departureAirportCode: Airports.LAX,
   cost: 329.8,
   departureDate: new Date(),
+  duration: '22h 50m 30s',
+  isAvailable: true,
 };

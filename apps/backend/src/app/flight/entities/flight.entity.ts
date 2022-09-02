@@ -1,17 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Airlines } from '../models/airlines.enum';
 import { Airports } from '../models/airports.enum';
 
 export type FlightDocument = Flight & Document;
 
-@Schema()
+@Schema({ _id: false })
 export class Flight {
+  @Prop({ type: Types.ObjectId })
+  _id: Types.ObjectId;
+
   @Prop({ required: true, type: String })
   airlineName: Airlines;
-
-  @Prop({ type: Number })
-  id: number;
 
   @Prop({ required: true, type: String })
   arrivalAirportCode: Airports;

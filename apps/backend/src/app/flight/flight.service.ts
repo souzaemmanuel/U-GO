@@ -1,19 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
+import { User } from '../users/entities/user.entity';
+import { UsersService } from '../users/users.service';
 import { CreateFlightDto } from './dto/create-flight.dto';
 import { UpdateFlightDto } from './dto/update-flight.dto';
 import { Flight, FlightDocument } from './entities/flight.entity';
-import { FlightFilter } from './models/flight-search.model';
+import { BookedFlight, FlightFilter } from './models/flight-search.model';
 
 @Injectable()
 export class FlightService {
   constructor(
-    @InjectModel(Flight.name) private flightModel: Model<FlightDocument>
+    @InjectModel(Flight.name) private flightModel: Model<FlightDocument>,
+    private readonly userService: UsersService
   ) {}
 
   create(createFlightDto: CreateFlightDto) {
-    return new this.flightModel(createFlightDto).save();
+    const flight = new this.flightModel({
+      ...createFlightDto,
+      _id: new Types.ObjectId(),
+    });
+
+    return flight.save();
   }
 
   search(filter: FlightFilter) {
@@ -21,10 +29,12 @@ export class FlightService {
       arrivalAirportCode: filter.from,
       departureAirportCode: filter.to,
       cost: { $lt: filter.budget },
+      isAvailable: true,
       departureDate: {
         $gt: new Date(),
       },
     };
+
     return this.flightModel.find(where);
   }
 
@@ -36,17 +46,55 @@ export class FlightService {
     return this.flightModel.findById(id);
   }
 
-  findByEmail(email: string) {
-    const obj = this.flightModel.findOne({ email });
-    return obj;
-  }
-
   update(id: string, updateFlightDto: UpdateFlightDto) {
     return this.flightModel.findByIdAndUpdate(
       { _id: id },
       { $set: updateFlightDto },
       { new: true }
     );
+  }
+
+  leaveFlightUnavailable(id: string) {
+    return this.flightModel.updateOne(
+      {
+        _id: new Types.ObjectId(id),
+      },
+      { isAvailable: false },
+      { upsert: true }
+    );
+  }
+
+  async book(flightId: string, user: User): Promise<BookedFlight> {
+    //get flight
+    const flight = await this.flightModel
+      .findOne({
+        _id: new Types.ObjectId(flightId),
+        isAvailable: true,
+      })
+      .exec();
+
+    if (!flight) {
+      throw new HttpException(
+        'Flight was not found or this is not available anymore!',
+        HttpStatus.NOT_FOUND
+      );
+    }
+
+    //leaving flight as unavailable
+    this.leaveFlightUnavailable(flightId).exec();
+
+    //geting user details
+    let dbUser = await this.userService.findByEmail(user.email).exec();
+
+    dbUser.tickets.push(new Types.ObjectId(flightId));
+
+    //linking user x tickets
+    this.userService.updateTickets(dbUser.id, dbUser);
+
+    return {
+      ...flight.toJSON(),
+      clientName: dbUser.name,
+    } as BookedFlight;
   }
 
   remove(id: string) {

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
@@ -13,13 +13,14 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     if (await this.findByEmail(createUserDto.email)) {
       throw new HttpException(
-        'User already existis',
+        'User already exists',
         HttpStatus.UNPROCESSABLE_ENTITY
       );
     }
 
     const user = new this.userModel({
       ...createUserDto,
+      _id: new Types.ObjectId(),
       password: await bcrypt.hash(createUserDto.password, 10),
     });
 
@@ -35,8 +36,18 @@ export class UsersService {
   }
 
   findByEmail(email: string) {
-    const obj = this.userModel.findOne({ email });
-    return obj;
+    return this.userModel.findOne({ email });
+  }
+
+  updateTickets(id: string, updateUserDto: UpdateUserDto) {
+    return this.userModel.findOneAndUpdate(
+      {
+        _id: new Types.ObjectId(id),
+        email: updateUserDto.email,
+      },
+      { tickets: updateUserDto.tickets },
+      { upsert: true, useFindAndModify: false }
+    );
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

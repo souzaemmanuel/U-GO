@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { UnauthorizedError } from './errors/unauthorized.error';
+import { LoginRequestBody } from './models/login-request-body';
 import { UserPayload } from './models/user-payload';
 import { UserToken } from './models/user-token';
 
@@ -14,17 +15,21 @@ export class AuthService {
     private readonly userService: UsersService
   ) {}
 
-  async login(user: User): Promise<UserToken> {
+  async login(user: LoginRequestBody): Promise<UserToken> {
+    const loggedUser = (
+      await this.userService.findByEmail(user.email)
+    ).toObject() as User;
+
     const payload: UserPayload = {
-      sub: 1,
-      email: user.email,
-      name: user.name,
+      sub: loggedUser._id.toJSON(),
+      email: loggedUser.email,
+      name: loggedUser.name,
     };
 
     return {
       accessToken: this.jwtService.sign(payload),
       email: user.email,
-      name: user.name,
+      name: loggedUser.name,
     };
   }
 

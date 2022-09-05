@@ -7,13 +7,14 @@ import { UsersModule } from './../users/users.module';
 import { LoginValidationMiddleware } from './middlewares/login-validation.middleware';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JWT_SECRET } from 'apps/backend/secrets';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
+      secret: JWT_SECRET,
       signOptions: { expiresIn: '2d' },
     }),
   ],

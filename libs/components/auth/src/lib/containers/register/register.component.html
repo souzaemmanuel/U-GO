@@ -1,3 +1,12 @@
-<u-go-register-account
-  (submitForm)="createAccount($event)"
-></u-go-register-account>
+<div class="container">
+  <div class="toolbar-section">
+    <div class="form-group">
+      <button class="button-light-blue" (click)="goToLogin()">
+        Create Account
+      </button>
+    </div>
+  </div>
+  <u-go-register-account
+    (submitForm)="createAccount($event)"
+  ></u-go-register-account>
+</div>

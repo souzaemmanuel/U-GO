@@ -28,4 +28,8 @@ export class RegisterComponent implements OnDestroy {
         this.router.navigate(['auth/login']);
       });
   }
+
+  goToLogin() {
+    this.router.navigate(['auth/login']);
+  }
 }

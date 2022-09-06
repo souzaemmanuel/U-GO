@@ -8,6 +8,9 @@
   padding: 0px 20px 0px 20px;
   width: 100%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 @mixin button($color, $background-color, $font-weight: false, $border: false) {
@@ -50,4 +53,9 @@
 
 .button-logout {
   @include button($blue, $white, 600);
+}
+
+.icon {
+  transform: rotate(45deg);
+  font-size: 20px;
 }

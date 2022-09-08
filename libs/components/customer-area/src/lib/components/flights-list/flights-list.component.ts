@@ -10,8 +10,6 @@ export class FlightsListComponent {
   @Input() flights: Flight[] = [];
   @Output() bookFlight: EventEmitter<string> = new EventEmitter();
 
-  constructor() {}
-
   book(id: string) {
     this.bookFlight.emit(id);
   }

@@ -10,10 +10,6 @@ table.flightsTable th {
   padding: 9px 5px;
 }
 
-table.flightsTable tbody td:last-child {
-  width: 200px;
-}
-
 table.flightsTable tbody td:not(:first-child) {
   color: #838383;
   font-size: 13px;

@@ -4,12 +4,47 @@
   </div>
   <form class="form-section" [formGroup]="flightForm">
     <div class="form-group">
-      <input placeholder="From" type="text" formControlName="from" />
+      <label>Insert the departure airport</label>
+      <ng-autocomplete
+        #fromAutocomplete
+        [data]="departureAirports"
+        [searchKeyword]="keyword"
+        [itemTemplate]="itemTemplate"
+        [debounceTime]="600"
+        [notFoundTemplate]="notFoundTemplate"
+        [historyListMaxNumber]="5"
+        [isLoading]="isLoadingFrom"
+        placeholder="From"
+        notFoundText="No airport found"
+        (selected)="selectOption($event, 'from')"
+        (inputChanged)="onChangeSearch($event, 'from'); isLoadingFrom = true"
+        (inputCleared)="clearValue('from'); fromAutocomplete.close()"
+      >
+      </ng-autocomplete>
     </div>
+
     <div class="form-group">
-      <input placeholder="To" type="text" formControlName="to" />
+      <label>Insert the arrival airport</label>
+      <ng-autocomplete
+        #fromAutocomplete
+        [data]="arrivalAirports"
+        [searchKeyword]="keyword"
+        [itemTemplate]="itemTemplate"
+        [debounceTime]="600"
+        [notFoundTemplate]="notFoundTemplate"
+        [isLoading]="isLoadingTo"
+        [historyListMaxNumber]="5"
+        placeholder="To"
+        notFoundText="No airport found"
+        (selected)="selectOption($event, 'to')"
+        (inputChanged)="onChangeSearch($event, 'to'); isLoadingTo = true"
+        (inputCleared)="clearValue('to'); fromAutocomplete.close()"
+      >
+      </ng-autocomplete>
     </div>
-    <div class="form-group">
+
+    <div class="form-group d-flex-column">
+      <label>Insert your max budget</label>
       <input
         placeholder="Max $"
         type="number"
@@ -18,6 +53,7 @@
         formControlName="budget"
       />
     </div>
+
     <div class="form-group">
       <button class="button-light-blue" (click)="searchFlights()">
         <span> Search flights </span>
@@ -26,3 +62,11 @@
     </div>
   </form>
 </div>
+
+<ng-template #itemTemplate let-item>
+  <a [innerHTML]="item.fullName"></a>
+</ng-template>
+
+<ng-template #notFoundTemplate let-notFound>
+  <div [innerHTML]="notFound"></div>
+</ng-template>

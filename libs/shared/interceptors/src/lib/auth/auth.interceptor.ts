@@ -22,7 +22,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let request: HttpRequest<any> = req;
 
-    if (token && !this.authService.isTokenExpired(token)) {
+    if (
+      token &&
+      !this.authService.isTokenExpired(token) &&
+      !req.url.includes('air-port-codes')
+    ) {
       request = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
       });

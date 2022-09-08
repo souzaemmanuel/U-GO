@@ -9,6 +9,7 @@ import { FlightsComponent } from './containers/flights/flights.component';
 import { ServicesModule } from '@u-go/services';
 import { AlertComponent } from './components/alert/alert.component';
 import { BookingModalComponent } from './components/booking-modal/booking-modal.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 export const customerRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const customerRoutes: Route[] = [
 
 @NgModule({
   imports: [
+    AutocompleteLibModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,

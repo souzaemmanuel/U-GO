@@ -17,3 +17,16 @@ export interface Flight {
 export interface BookedFlight extends Flight {
   clientName: string;
 }
+
+export interface Aiport {
+  city: string;
+  fullName: string;
+  country: { name: string };
+  iata: string;
+  name: string;
+  state: { name: string; abbr: string };
+}
+
+export interface AiportSearchResponse {
+  airports: Array<Aiport>;
+}

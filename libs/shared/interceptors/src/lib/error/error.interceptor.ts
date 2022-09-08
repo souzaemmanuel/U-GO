@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { LoadingService, SnackbarService } from '../../../../services/src';
+import { LoadingService, SnackbarService } from '@u-go/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -24,11 +24,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.loadingService.loading = false;
 
         if (error.message instanceof Array) {
-          alert(error.message[0]);
-          //TODO: Make this snackbar work
-          // this.snackbarService.open(error.message[0]);
+          this.snackbarService.showError(error.message[0]);
         } else {
-          alert(error.message);
+          this.snackbarService.showError(error.message);
         }
 
         return throwError(error);

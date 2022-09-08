@@ -13,6 +13,8 @@ import {
   ErrorInterceptor,
 } from '@u-go/interceptors';
 import { CustomerPortalModule, customerRoutes } from '@u-go/customer-area';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes = [
   { path: 'auth', children: authRoutes, canActivate: [AuthGuard] },
@@ -26,6 +28,8 @@ const routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     GuardsModule,
     CustomerPortalModule,
     LoadingModule,

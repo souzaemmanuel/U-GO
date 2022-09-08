@@ -1,12 +1,25 @@
 import { Injectable } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { ToastrService } from 'ngx-toastr';
+const DEFAULT_CONFIG = {
+  timeOut: 2000,
+  positionClass: 'toast-bottom-right',
+  preventDuplicates: true,
+};
 @Injectable({
   providedIn: 'root',
 })
 export class SnackbarService {
-  // constructor(private _snackBar: MatSnackBar) {}
-  // open(message: string) {
-  //   this._snackBar.open(message, 'OK');
-  // }
+  constructor(private toastr: ToastrService) {}
+
+  showSuccess(title: string, message: string) {
+    this.toastr.success(message, title, DEFAULT_CONFIG);
+  }
+
+  showError(message: string) {
+    this.toastr.error(message, '', DEFAULT_CONFIG);
+  }
+
+  showInfo(title: string, message: string) {
+    this.toastr.info(message, title, DEFAULT_CONFIG);
+  }
 }

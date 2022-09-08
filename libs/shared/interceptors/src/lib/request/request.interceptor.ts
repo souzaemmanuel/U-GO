@@ -7,7 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { delay, map, Observable } from 'rxjs';
-import { LoadingService } from '../../../../services/src';
+import { LoadingService } from '@u-go/services';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {

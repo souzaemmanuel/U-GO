@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '@env/frontend';
 import jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { SnackbarService } from '@u-go/services';
 
 const AUTH_TOKEN_KEY = 'token';
 @Injectable({
@@ -13,7 +14,11 @@ const AUTH_TOKEN_KEY = 'token';
 export class AuthService {
   private userSubject$ = new BehaviorSubject<UserToken>({} as UserToken);
   user$ = this.userSubject$.asObservable();
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) {}
 
   login(user: AuthUser): Observable<UserToken> {
     return this.httpClient
@@ -28,7 +33,10 @@ export class AuthService {
             accessToken: response.accessToken,
           });
 
-          alert(`Welcome !`);
+          this.snackbarService.showSuccess(
+            `Welcome ${response.name}!`,
+            'Now you can search and book flights'
+          );
         })
       );
   }

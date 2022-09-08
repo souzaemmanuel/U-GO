@@ -42,6 +42,9 @@ export class FlightsSearchComponent {
   onChangeSearch(search: string, field: string) {
     if (search.length < 3) return;
 
+    this.isLoadingTo = field === 'to';
+    this.isLoadingFrom = field === 'from';
+
     this.flightService
       .searchAirports(search)
       .subscribe((response: AiportSearchResponse) => {

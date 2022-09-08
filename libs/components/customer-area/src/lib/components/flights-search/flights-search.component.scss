@@ -10,4 +10,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+
+  .form-group {
+    text-align: center;
+
+    label {
+      font-size: 12px;
+      color: #009af3;
+      font-weight: 700;
+    }
+  }
+}
+
+.d-flex-column {
+  display: flex;
+  flex-direction: column;
 }

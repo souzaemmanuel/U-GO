@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthUser } from '@u-go/models';
+import { Aiport, AiportSearchResponse } from '@u-go/models';
+import { FlightService } from '@u-go/services';
 
 @Component({
   selector: 'u-go-flights-search',
@@ -9,6 +10,14 @@ import { AuthUser } from '@u-go/models';
 })
 export class FlightsSearchComponent {
   @Output() submitForm = new EventEmitter<any>();
+
+  arrivalAirports: Aiport[] = [];
+  departureAirports: Aiport[] = [];
+  isLoadingFrom = false;
+  isLoadingTo = false;
+  readonly keyword = 'fullName';
+
+  constructor(private flightService: FlightService) {}
 
   flightForm: FormGroup = new FormGroup({
     from: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -24,5 +33,38 @@ export class FlightsSearchComponent {
         budget: this.flightForm.value.budget,
       });
     }
+  }
+
+  selectOption(airport: Aiport, field: string) {
+    this.flightForm.get(field)?.setValue(airport.iata);
+  }
+
+  onChangeSearch(search: string, field: string) {
+    if (search.length < 3) return;
+
+    this.flightService
+      .searchAirports(search)
+      .subscribe((response: AiportSearchResponse) => {
+        this.isLoadingFrom = this.isLoadingTo = false;
+
+        if (response?.airports?.length) {
+          response.airports.map(
+            (airport) =>
+              (airport.fullName = `${airport.iata} - ${airport.city}`)
+          );
+
+          if (field === 'to') {
+            this.arrivalAirports = response.airports;
+          }
+          if (field === 'from') {
+            this.departureAirports = response.airports;
+          }
+        } else this.departureAirports = this.arrivalAirports = [];
+      });
+  }
+
+  clearValue(field: string) {
+    this.flightForm.get(field)?.setValue('');
+    this.departureAirports = [];
   }
 }

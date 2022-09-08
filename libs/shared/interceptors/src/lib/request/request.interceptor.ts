@@ -13,11 +13,14 @@ import { LoadingService } from '../../../../services/src';
 export class RequestInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
+  requestWithNoLoading = ['www..com'];
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    this.loadingService.loading = true;
+    //Not show full screen loading, when is using autocomplete
+    if (!request.url.includes('air-port-codes'))
+      this.loadingService.loading = true;
 
     return next.handle(request).pipe(
       delay(500),

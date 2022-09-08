@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SearchFlightsFilter, Flight } from '@u-go/models';
+import {
+  SearchFlightsFilter,
+  Flight,
+  BookedFlight,
+  AiportSearchResponse,
+} from '@u-go/models';
 import { environment } from '@env/frontend';
 import { Observable } from 'rxjs';
-import { BookedFlight } from '../../../../models/src';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +26,17 @@ export class FlightService {
     return this.httpClient.post<BookedFlight>(
       environment.baseUrl + 'flight/book',
       { flightId }
+    );
+  }
+
+  searchAirports(airportName: string): Observable<AiportSearchResponse> {
+    return this.httpClient.get<AiportSearchResponse>(
+      `${environment.airportEndpoint}?term=${airportName}`,
+      {
+        headers: {
+          'APC-Auth': '683c2a1e8b',
+        },
+      }
     );
   }
 }

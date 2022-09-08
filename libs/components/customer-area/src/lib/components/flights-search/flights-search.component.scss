@@ -22,6 +22,14 @@
   }
 }
 
+.autocomplete-container :first {
+  z-index: 5 !important;
+}
+
+.autocomplete-container :not(:first) {
+  z-index: 4 !important;
+}
+
 .d-flex-column {
   display: flex;
   flex-direction: column;

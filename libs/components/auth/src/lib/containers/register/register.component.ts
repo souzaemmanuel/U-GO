@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreateAccount } from '@u-go/models';
-import { AuthService } from '@u-go/services';
+import { AuthService, SnackbarService } from '@u-go/services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -12,7 +12,11 @@ import { Subject, takeUntil } from 'rxjs';
 export class RegisterComponent implements OnDestroy {
   onDestroy$ = new Subject<boolean>();
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
@@ -24,7 +28,11 @@ export class RegisterComponent implements OnDestroy {
       .createAccount(account)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
-        alert('User created successfully!');
+        this.snackbarService.showSuccess(
+          'User created successfully!',
+          'Please, login and enter the application'
+        );
+
         this.router.navigate(['auth/login']);
       });
   }

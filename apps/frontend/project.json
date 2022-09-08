@@ -22,7 +22,10 @@
             "output": "./assets"
           }
         ],
-        "styles": ["apps/frontend/src/styles.scss"],
+        "styles": [
+          "apps/frontend/src/styles.scss",
+          "node_modules/ngx-toastr/toastr.css"
+        ],
         "scripts": []
       },
       "configurations": {

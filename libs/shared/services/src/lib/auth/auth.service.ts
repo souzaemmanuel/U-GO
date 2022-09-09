@@ -79,13 +79,18 @@ export class AuthService {
   }
 
   isUserLoggedIn(): boolean {
-    const token = this.getAuthToken();
+    try {
+      const token = this.getAuthToken();
 
-    if (!token || this.isTokenExpired(token)) {
+      if (!token || this.isTokenExpired(token)) {
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      this.logout();
       return false;
     }
-
-    return true;
   }
 
   logout(): void {

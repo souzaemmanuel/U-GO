@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (this.authService.isUserLoggedIn()) {
+      console.log(1);
       if (state.url.includes('customer')) {
         return true;
       }
@@ -26,6 +27,7 @@ export class AuthGuard implements CanActivate {
       if (state.url.includes('auth')) {
         return true;
       }
+      console.log('opa');
       this.router.navigate(['auth/login']);
       return false;
     }

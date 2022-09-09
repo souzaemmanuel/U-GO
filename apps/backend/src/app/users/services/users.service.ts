@@ -10,10 +10,10 @@ import { User, UserDocument } from '../entities/user.entity';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     if (await this.findByEmail(createUserDto.email)) {
       throw new HttpException(
-        'User already exists',
+        'This email is already registered! Try again with a different email.',
         HttpStatus.UNPROCESSABLE_ENTITY
       );
     }
@@ -27,38 +27,20 @@ export class UsersService {
     return user.save();
   }
 
-  findAll() {
-    return this.userModel.find();
+  findByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
   }
 
-  findOne(id: string) {
-    return this.userModel.findById(id);
-  }
-
-  findByEmail(email: string) {
-    return this.userModel.findOne({ email });
-  }
-
-  updateTickets(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findOneAndUpdate(
-      {
-        _id: new Types.ObjectId(id),
-        email: updateUserDto.email,
-      },
-      { tickets: updateUserDto.tickets },
-      { upsert: true, useFindAndModify: false }
-    );
-  }
-
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findByIdAndUpdate(
-      { _id: id },
-      { $set: updateUserDto },
-      { new: true }
-    );
-  }
-
-  remove(id: string) {
-    return this.userModel.deleteOne({ _id: id }).exec();
+  updateTickets(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userModel
+      .findOneAndUpdate(
+        {
+          _id: new Types.ObjectId(id),
+          email: updateUserDto.email,
+        },
+        { tickets: updateUserDto.tickets },
+        { upsert: true, useFindAndModify: false }
+      )
+      .exec();
   }
 }

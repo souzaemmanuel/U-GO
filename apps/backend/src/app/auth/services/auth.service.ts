@@ -16,12 +16,10 @@ export class AuthService {
   ) {}
 
   async login(user: LoginRequestBody): Promise<UserToken> {
-    const loggedUser = (
-      await this.userService.findByEmail(user.email)
-    ).toObject() as User;
+    const loggedUser = await this.userService.findByEmail(user.email);
 
     const payload: UserPayload = {
-      sub: loggedUser._id.toJSON(),
+      sub: loggedUser._id.toString(),
       email: loggedUser.email,
       name: loggedUser.name,
     };

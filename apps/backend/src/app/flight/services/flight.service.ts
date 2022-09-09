@@ -35,33 +35,19 @@ export class FlightService {
       },
     };
 
-    return this.flightModel.find(where);
-  }
-
-  findAll() {
-    return this.flightModel.find();
-  }
-
-  findOne(id: string) {
-    return this.flightModel.findById(id);
-  }
-
-  update(id: string, updateFlightDto: UpdateFlightDto) {
-    return this.flightModel.findByIdAndUpdate(
-      { _id: id },
-      { $set: updateFlightDto },
-      { new: true }
-    );
+    return this.flightModel.find(where).exec();
   }
 
   leaveFlightUnavailable(id: string) {
-    return this.flightModel.updateOne(
-      {
-        _id: new Types.ObjectId(id),
-      },
-      { isAvailable: false },
-      { upsert: true }
-    );
+    return this.flightModel
+      .updateOne(
+        {
+          _id: new Types.ObjectId(id),
+        },
+        { isAvailable: false },
+        { upsert: true }
+      )
+      .exec();
   }
 
   async book(flightId: string, user: User): Promise<BookedFlight> {
@@ -81,23 +67,19 @@ export class FlightService {
     }
 
     //leaving flight as unavailable
-    this.leaveFlightUnavailable(flightId).exec();
+    this.leaveFlightUnavailable(flightId);
 
     //geting user details
-    let dbUser = await this.userService.findByEmail(user.email).exec();
+    let dbUser = await this.userService.findByEmail(user.email);
 
     dbUser.tickets.push(new Types.ObjectId(flightId));
 
     //linking user x tickets
-    this.userService.updateTickets(dbUser.id, dbUser);
+    this.userService.updateTickets(dbUser._id.toString(), dbUser);
 
     return {
       ...flight.toJSON(),
       clientName: dbUser.name,
     } as BookedFlight;
-  }
-
-  remove(id: string) {
-    return this.flightModel.deleteOne({ _id: id }).exec();
   }
 }

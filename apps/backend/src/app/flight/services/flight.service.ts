@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { User } from '../users/entities/user.entity';
-import { UsersService } from '../users/users.service';
-import { CreateFlightDto } from './dto/create-flight.dto';
-import { UpdateFlightDto } from './dto/update-flight.dto';
-import { Flight, FlightDocument } from './entities/flight.entity';
-import { BookedFlight, FlightFilter } from './models/flight-search.model';
+import { User } from '../../users/entities/user.entity';
+import { UsersService } from '../../users/services/users.service';
+import { CreateFlightDto } from '../dto/create-flight.dto';
+import { UpdateFlightDto } from '../dto/update-flight.dto';
+import { Flight, FlightDocument } from '../entities/flight.entity';
+import { FlightFilter, BookedFlight } from '../models/flight-search.model';
 
 @Injectable()
 export class FlightService {
@@ -35,33 +35,19 @@ export class FlightService {
       },
     };
 
-    return this.flightModel.find(where);
-  }
-
-  findAll() {
-    return this.flightModel.find();
-  }
-
-  findOne(id: string) {
-    return this.flightModel.findById(id);
-  }
-
-  update(id: string, updateFlightDto: UpdateFlightDto) {
-    return this.flightModel.findByIdAndUpdate(
-      { _id: id },
-      { $set: updateFlightDto },
-      { new: true }
-    );
+    return this.flightModel.find(where).exec();
   }
 
   leaveFlightUnavailable(id: string) {
-    return this.flightModel.updateOne(
-      {
-        _id: new Types.ObjectId(id),
-      },
-      { isAvailable: false },
-      { upsert: true }
-    );
+    return this.flightModel
+      .updateOne(
+        {
+          _id: new Types.ObjectId(id),
+        },
+        { isAvailable: false },
+        { upsert: true }
+      )
+      .exec();
   }
 
   async book(flightId: string, user: User): Promise<BookedFlight> {
@@ -81,23 +67,19 @@ export class FlightService {
     }
 
     //leaving flight as unavailable
-    this.leaveFlightUnavailable(flightId).exec();
+    this.leaveFlightUnavailable(flightId);
 
     //geting user details
-    let dbUser = await this.userService.findByEmail(user.email).exec();
+    let dbUser = await this.userService.findByEmail(user.email);
 
     dbUser.tickets.push(new Types.ObjectId(flightId));
 
     //linking user x tickets
-    this.userService.updateTickets(dbUser.id, dbUser);
+    this.userService.updateTickets(dbUser._id.toString(), dbUser);
 
     return {
       ...flight.toJSON(),
       clientName: dbUser.name,
     } as BookedFlight;
-  }
-
-  remove(id: string) {
-    return this.flightModel.deleteOne({ _id: id }).exec();
   }
 }

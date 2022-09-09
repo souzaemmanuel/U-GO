@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 const DEFAULT_CONFIG = {
-  timeOut: 2000,
+  timeOut: 3000,
   positionClass: 'toast-bottom-right',
   preventDuplicates: true,
 };

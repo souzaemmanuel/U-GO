@@ -4,7 +4,7 @@ import {
   SearchFlightsFilter,
   Flight,
   BookedFlight,
-  AiportSearchResponse,
+  AirportSearchResponse,
 } from '@u-go/models';
 import { environment } from '@env/frontend';
 import { Observable } from 'rxjs';
@@ -29,8 +29,8 @@ export class FlightService {
     );
   }
 
-  searchAirports(airportName: string): Observable<AiportSearchResponse> {
-    return this.httpClient.get<AiportSearchResponse>(
+  searchAirports(airportName: string): Observable<AirportSearchResponse> {
+    return this.httpClient.get<AirportSearchResponse>(
       `${environment.airportEndpoint}?term=${airportName}`,
       {
         headers: {

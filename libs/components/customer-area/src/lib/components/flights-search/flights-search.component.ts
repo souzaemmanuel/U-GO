@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Aiport, AiportSearchResponse } from '@u-go/models';
+import { Airport, AirportSearchResponse } from '@u-go/models';
 import { FlightService } from '@u-go/services';
 
 @Component({
@@ -11,8 +11,8 @@ import { FlightService } from '@u-go/services';
 export class FlightsSearchComponent {
   @Output() submitForm = new EventEmitter<any>();
 
-  arrivalAirports: Aiport[] = [];
-  departureAirports: Aiport[] = [];
+  arrivalAirports: Airport[] = [];
+  departureAirports: Airport[] = [];
   isLoadingFrom = false;
   isLoadingTo = false;
   readonly keyword = 'fullName';
@@ -35,16 +35,19 @@ export class FlightsSearchComponent {
     }
   }
 
-  selectOption(airport: Aiport, field: string) {
+  selectOption(airport: Airport, field: string) {
     this.flightForm.get(field)?.setValue(airport.iata);
   }
 
   onChangeSearch(search: string, field: string) {
     if (search.length < 3) return;
 
+    this.isLoadingTo = field === 'to';
+    this.isLoadingFrom = field === 'from';
+
     this.flightService
       .searchAirports(search)
-      .subscribe((response: AiportSearchResponse) => {
+      .subscribe((response: AirportSearchResponse) => {
         this.isLoadingFrom = this.isLoadingTo = false;
 
         if (response?.airports?.length) {

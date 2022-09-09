@@ -17,7 +17,7 @@
         placeholder="From"
         notFoundText="No airport found"
         (selected)="selectOption($event, 'from')"
-        (inputChanged)="onChangeSearch($event, 'from'); isLoadingFrom = true"
+        (inputChanged)="onChangeSearch($event, 'from')"
         (inputCleared)="clearValue('from'); fromAutocomplete.close()"
       >
       </ng-autocomplete>
@@ -37,7 +37,7 @@
         placeholder="To"
         notFoundText="No airport found"
         (selected)="selectOption($event, 'to')"
-        (inputChanged)="onChangeSearch($event, 'to'); isLoadingTo = true"
+        (inputChanged)="onChangeSearch($event, 'to')"
         (inputCleared)="clearValue('to'); fromAutocomplete.close()"
       >
       </ng-autocomplete>

@@ -18,7 +18,7 @@ export interface BookedFlight extends Flight {
   clientName: string;
 }
 
-export interface Aiport {
+export interface Airport {
   city: string;
   fullName: string;
   country: { name: string };
@@ -27,6 +27,6 @@ export interface Aiport {
   state: { name: string; abbr: string };
 }
 
-export interface AiportSearchResponse {
-  airports: Array<Aiport>;
+export interface AirportSearchResponse {
+  airports: Array<Airport>;
 }

@@ -19,4 +19,11 @@ describe('FlightsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create', () => {
+    jest.spyOn(component.bookFlight, 'emit');
+    const id = '20000';
+    component.book(id);
+    expect(component.bookFlight.emit).toHaveBeenCalledWith(id);
+  });
 });

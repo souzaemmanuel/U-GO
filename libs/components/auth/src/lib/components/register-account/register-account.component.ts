@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CreateAccount } from '@u-go/models';
 
 @Component({
   selector: 'u-go-register-account',
@@ -7,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./register-account.component.scss'],
 })
 export class RegisterAccountComponent {
-  @Output() submitForm = new EventEmitter<any>();
+  @Output() submitForm = new EventEmitter<CreateAccount>();
 
   accountForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

@@ -7,11 +7,11 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { IsPublic } from './decorators/is-public.decorator';
-import { UserToken } from './models/user-token';
-import { LoginRequestBody } from './models/login-request-body';
+import { IsPublic } from '../decorators/is-public.decorator';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
+import { LoginRequestBody } from '../models/login-request-body';
+import { UserToken } from '../models/user-token';
+import { AuthService } from '../services/auth.service';
 
 @Controller()
 export class AuthController {

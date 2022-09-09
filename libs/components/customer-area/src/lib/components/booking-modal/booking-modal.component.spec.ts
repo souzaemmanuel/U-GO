@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BookingModalComponent } from './booking-modal.component';
 
 describe('BookingModalComponent', () => {
@@ -18,5 +17,11 @@ describe('BookingModalComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit currentState event', () => {
+    jest.spyOn(component.currentState, 'emit');
+    component.toggle();
+    expect(component.currentState.emit).toHaveBeenCalled();
   });
 });

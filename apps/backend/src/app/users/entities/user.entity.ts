@@ -13,6 +13,7 @@ export class User {
 
   @Prop({ type: Types.ObjectId })
   _id: Types.ObjectId;
+
   @Prop({ required: true, type: String })
   email: string;
 

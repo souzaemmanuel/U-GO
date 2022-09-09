@@ -24,15 +24,15 @@
       *ngSwitchCase="flights.length > 0 && !showErrorState && !showErrorState"
     ></u-go-flights-list>
 
-    <u-go-alert
+    <u-go-search-feedback
       *ngSwitchCase="showEmptyState"
       [alertMessage]="emptyListMessage"
-    ></u-go-alert>
+    ></u-go-search-feedback>
 
-    <u-go-alert
+    <u-go-search-feedback
       *ngSwitchCase="showErrorState"
       [alertMessage]="errorMessage"
-    ></u-go-alert>
+    ></u-go-search-feedback>
   </div>
 </div>
 

@@ -75,7 +75,7 @@ export class FlightService {
     dbUser.tickets.push(new Types.ObjectId(flightId));
 
     //linking user x tickets
-    this.userService.updateTickets(dbUser._id.toString(), dbUser);
+    await this.userService.updateTickets(dbUser._id.toString(), dbUser);
 
     return {
       ...flight.toJSON(),

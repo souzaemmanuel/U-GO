@@ -9,16 +9,16 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { FlightService } from './flight.service';
-import { CreateFlightDto } from './dto/create-flight.dto';
-import { UpdateFlightDto } from './dto/update-flight.dto';
+import { CurrentUser } from '../../auth/decorators/current-user.decorator';
+import { User } from '../../users/entities/user.entity';
+import { CreateFlightDto } from '../dto/create-flight.dto';
+import { UpdateFlightDto } from '../dto/update-flight.dto';
 import {
-  BookedFlight,
-  BookFlight,
   FlightFilter,
-} from './models/flight-search.model';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { User } from '../users/entities/user.entity';
+  BookFlight,
+  BookedFlight,
+} from '../models/flight-search.model';
+import { FlightService } from '../services/flight.service';
 
 @Controller('flight')
 export class FlightController {

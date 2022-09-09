@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { User } from '../users/entities/user.entity';
-import { UsersService } from '../users/users.service';
-import { CreateFlightDto } from './dto/create-flight.dto';
-import { UpdateFlightDto } from './dto/update-flight.dto';
-import { Flight, FlightDocument } from './entities/flight.entity';
-import { BookedFlight, FlightFilter } from './models/flight-search.model';
+import { User } from '../../users/entities/user.entity';
+import { UsersService } from '../../users/services/users.service';
+import { CreateFlightDto } from '../dto/create-flight.dto';
+import { UpdateFlightDto } from '../dto/update-flight.dto';
+import { Flight, FlightDocument } from '../entities/flight.entity';
+import { FlightFilter, BookedFlight } from '../models/flight-search.model';
 
 @Injectable()
 export class FlightService {

@@ -1,105 +1,66 @@
 
+# U-GO
 
-# UGo
+Through the platform, users buy airline tickets within their budget
 
-This project was generated using [Nx](https://nx.dev).
+# Goal
+I don't aim to create a real platform here, I just chose an idea to study more nestjs, mongodb and other tech.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+Many aspects of this application are simple and the idea was just to create a proof of concept without adding too much complexity.
 
-🔎 **Smart, Fast and Extensible Build System**
+# Use cases and feature:
 
-## Quick Start & Documentation
+- Autentication, using jwt and encrpiting the user password;
+- Login logout;
+- Authorization;
+- Creating a new account;
+- Searching for flights;
+- Seeing the results;
+- Book a fligt.
 
-[Nx Documentation](https://nx.dev/angular)
+# Stack:
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+- Monorepo via NX.
+- Angular, frontend
+- NestJs (NodeJs), backend.
+- Mongo db, database.
 
-[Interactive Tutorial](https://nx.dev/react-tutorial/01-create-application)
+- Cloud: AWS S3 for the front and EC2 for the back.
+## Install
 
-## Adding capabilities to your workspace
+Install the dependecies using npm or yarn:
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+```bash
+  cd U-GO
+  npm install  or yarn install
+```
+    
+## Running locally
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Clone the project, EEnter the project directory
 
-Below are our core plugins:
+```bash
+   U-GO cd
+```
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+install the dependencies
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+```bash
+   npm install or yarn install
+```
 
-## Generate an application
+Starting the server
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+```bash
+   nx serve backend
+```
 
-> You can use any of the plugins above to generate applications as well.
+Starting the frontend
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```bash
+   nx serve frontend
+```
 
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@u-go/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-
-
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+## Demonstration
+ 
+![Demo](ugo_demo.gif)
